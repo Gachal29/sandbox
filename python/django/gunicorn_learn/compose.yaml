@@ -1,0 +1,12 @@
+services:
+  app:
+    image: python:3.12-slim
+    ports:
+      - 8111:8000
+    volumes:
+      - type: bind
+        source: .
+        target: /workspace
+    # command: ["/bin/bash"]
+    command: ["/workspace/venv/bin/gunicorn", "--chdir", "/workspace", "gunicorn_learn.wsgi:application", "--bind", "0.0.0.0"]
+    tty: true
